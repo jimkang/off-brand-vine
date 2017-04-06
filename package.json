@@ -1,0 +1,30 @@
+{
+  "name": "off-brand-vine",
+  "version": "1.0.0",
+  "description": "A job that takes videos from a Twitter account and puts it into a GitHub repo (from which you can make a web page that displays them).",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jimkang/off-brand-vine.git"
+  },
+  "keywords": [],
+  "author": "Jim Kang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jimkang/off-brand-vine/issues"
+  },
+  "homepage": "https://github.com/jimkang/off-brand-vine",
+  "devDependencies": {
+    "tape": "^4.6.0",
+    "through-stream-testbed": "^1.0.0"
+  },
+  "dependencies": {
+    "lodash.clonedeep": "^4.5.0",
+    "request": "^2.81.0",
+    "standard-bail": "^2.0.1"
+  }
+}
