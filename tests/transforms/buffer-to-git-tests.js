@@ -19,7 +19,7 @@ var bufferPackages = [
     videoBufferInfo: {
       'bitrate': 832000,
       'content_type': 'video/mp4',
-      'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/849617218308591616/pr/vid/480x480/pbDLD37qZWDBGBHW.mp4'
+      'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/pbDLD37qZWDBGBHW.mp4'
     },
     buffer: fs.readFileSync(videoBasePath + 'pbDLD37qZWDBGBHW.mp4')
   },
@@ -30,7 +30,7 @@ var bufferPackages = [
     videoBufferInfo: {
       'bitrate': 832000,
       'content_type': 'video/mp4',
-      'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/849617029845962753/pr/vid/480x480/DPL17ys0-inDTwQW.mp4'
+      'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/DPL17ys0-inDTwQW.mp4'
     },
     buffer: fs.readFileSync(videoBasePath + 'DPL17ys0-inDTwQW.mp4')
   }

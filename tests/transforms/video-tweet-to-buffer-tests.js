@@ -16,16 +16,16 @@ var videoTweetPackages = [
       {
         'bitrate': 832000,
         'content_type': 'video/mp4',
-        'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/849617218308591616/pr/vid/480x480/pbDLD37qZWDBGBHW.mp4'
+        'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/pbDLD37qZWDBGBHW.mp4'
       },
       {
         'bitrate': 320000,
         'content_type': 'video/mp4',
-        'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/849617218308591616/pr/vid/240x240/caXUEKwOGdmqzFAR.mp4'
+        'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/caXUEKwOGdmqzFAR.mp4'
       },
       {
         'content_type': 'application/x-mpegURL',
-        'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/849617218308591616/pr/pl/2FUczq6u2kMIWzz9.m3u8'
+        'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/2FUczq6u2kMIWzz9.m3u8'
       }
     ]
   },
@@ -36,17 +36,17 @@ var videoTweetPackages = [
     'videos': [
       {
         'content_type': 'application/x-mpegURL',
-        'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/849617029845962753/pr/pl/eWAuPEQksN7frQR9.m3u8'
+        'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/eWAuPEQksN7frQR9.m3u8'
       },
       {
         'bitrate': 832000,
         'content_type': 'video/mp4',
-        'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/849617029845962753/pr/vid/480x480/DPL17ys0-inDTwQW.mp4'
+        'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/DPL17ys0-inDTwQW.mp4'
       },
       {
         'bitrate': 320000,
         'content_type': 'video/mp4',
-        'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/849617029845962753/pr/vid/240x240/7qhBfMtB60ZijShh.mp4'
+        'url': 'http://jimkang.com/off-brand-vine/tests/fixtures/videos/7qhBfMtB60ZijShh.mp4'
       }
     ]
   }
