@@ -32,6 +32,7 @@
     "lodash.omit": "^4.5.0",
     "ndjson": "^1.5.0",
     "request": "^2.81.0",
-    "standard-bail": "^2.0.1"
+    "standard-bail": "^2.0.1",
+    "twit": "^2.2.5"
   }
 }
