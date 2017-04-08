@@ -23,6 +23,7 @@
     "through-stream-testbed": "^1.0.0"
   },
   "dependencies": {
+    "get-video-from-twitter-timeline": "^1.0.2",
     "github-file": "^1.0.6",
     "lodash.clonedeep": "^4.5.0",
     "request": "^2.81.0",

@@ -42,7 +42,8 @@ var bufferToGit = BufferToGit({
   gitToken: config.githubTest.gitToken,
   repo: config.githubTest.repo,
   request: request,
-  shouldSetUserAgent: true
+  shouldSetUserAgent: true,
+  pathInRepo: 'video/files'
 });
 
 test(

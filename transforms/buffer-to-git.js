@@ -2,6 +2,7 @@ var GitHubFile = require('github-file');
 var sb = require('standard-bail')();
 
 function BufferToGit(opts) {
+  var pathInRepo = opts.pathInRepo;
   opts.encodeInBase64 = encodeInBase64;
   var githubFile = GitHubFile(opts);
 
@@ -10,7 +11,7 @@ function BufferToGit(opts) {
   function bufferToGit(bufferPackage, enc, done) {
     githubFile.update(
       {
-        filePath: 'videos/' + getFilename(bufferPackage.videoBufferInfo.url),
+        filePath: pathInRepo + '/' + getFilename(bufferPackage.videoBufferInfo.url),
         content: bufferPackage.buffer,
         message: 'off-brand-vine posting video'
       },
