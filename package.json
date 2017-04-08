@@ -23,6 +23,7 @@
     "through-stream-testbed": "^1.0.0"
   },
   "dependencies": {
+    "github-file": "^1.0.6",
     "lodash.clonedeep": "^4.5.0",
     "request": "^2.81.0",
     "standard-bail": "^2.0.1"

@@ -1,4 +1,4 @@
-/* global Buffer, __dirname */
+/* global __dirname */
 
 var test = require('tape');
 var fs = require('fs');
@@ -41,7 +41,8 @@ var bufferToGit = BufferToGit({
   gitRepoOwner: config.githubTest.gitRepoOwner,
   gitToken: config.githubTest.gitToken,
   repo: config.githubTest.repo,
-  request: request  
+  request: request,
+  shouldSetUserAgent: true
 });
 
 test(
@@ -62,5 +63,5 @@ function checkGitResult(t, item) {
   t.ok(item.tweetId, 'There is a tweetId.');
   t.equal(typeof item.caption, 'string', 'There is a caption.');
   t.ok(item.date, 'There is a date.');
-  t.ok(item.sha, 'There is a SHA for the git commit.');
+  t.ok(item.postedToGit, 'There is a flag indicating it was committed.');
 }
