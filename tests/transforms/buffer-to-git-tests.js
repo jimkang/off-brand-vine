@@ -43,7 +43,8 @@ var bufferToGit = BufferToGit({
   repo: config.githubTest.repo,
   request: request,
   shouldSetUserAgent: true,
-  pathInRepo: 'video/files'
+  videoDir: 'video/files',
+  metaDir: 'video/meta'
 });
 
 test(
