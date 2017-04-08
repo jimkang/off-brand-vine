@@ -23,6 +23,7 @@
     "through-stream-testbed": "^1.0.0"
   },
   "dependencies": {
+    "boil-tweet-to-video": "^1.0.0",
     "d3-queue": "^3.0.5",
     "get-video-from-twitter-timeline": "^1.0.3",
     "github-file": "^1.0.6",
