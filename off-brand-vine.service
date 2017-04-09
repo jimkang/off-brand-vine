@@ -1,0 +1,12 @@
+[Unit]
+Description=off-brand-vine
+After=network.target
+[Service]
+ExecStart=/usr/local/bin/node /opt/off-brand-vine/stream-from-twitter-to-git.js
+Restart=always
+User=bot
+Group=bot
+Environment=PATH=/usr/bin:/usr/local/bin
+WorkingDirectory=/opt/off-brand-vine
+[Install]
+WantedBy=multi-user.target
