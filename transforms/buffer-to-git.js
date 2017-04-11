@@ -31,21 +31,21 @@ function BufferToGit(opts) {
 
   return bufferToGit;
 
-  function bufferToGit(bufferPackage, enc, done) {
+  function bufferToGit(cell, enc, done) {
     var stream = this;
 
-    var newPackage = omit(bufferPackage, 'buffer');
-    newPackage.videoFilename = getFilename(bufferPackage.videoBufferInfo.url);
+    var newCell = omit(cell, 'buffer');
+    newCell.videoFilename = getFilename(cell.videoBufferInfo.url);
 
     var bufferGitPayload = {
-      filePath: videoDir + '/' + newPackage.videoFilename,
-      content: bufferPackage.buffer,
+      filePath: videoDir + '/' + newCell.videoFilename,
+      content: cell.buffer,
       message: 'off-brand-vine posting video'
     };
 
     var metadataGitPayload = {
-      filePath: metaDir + '/' + newPackage.tweetId + '.json',
-      content: JSON.stringify(newPackage),
+      filePath: metaDir + '/' + newCell.tweetId + '.json',
+      content: JSON.stringify(newCell),
       message: 'off-brand-vine posting video metadata'
     };
 
@@ -57,8 +57,8 @@ function BufferToGit(opts) {
     q.awaitAll(sb(passPackage, done));
 
     function passPackage() {
-      newPackage.postedToGit = true;
-      stream.push(newPackage);
+      newCell.postedToGit = true;
+      stream.push(newCell);
       done();
     }
   }

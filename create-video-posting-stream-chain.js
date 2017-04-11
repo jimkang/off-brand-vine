@@ -26,9 +26,16 @@ function createVideoPostingStreamChain() {
 
   videoPackToBufferStream
     .pipe(bufferToGitStream)
+    // git to html stream
     .pipe(ndjson.stringify())
     .pipe(process.stdout);
 
+  bufferToGitStream.on('end', writeIndexes);
+
+  function writeIndexes() {
+    // TODO: html index building.
+    console.log('writeIndexes called.');
+  }
   return videoPackToBufferStream;
 }
 

@@ -7,7 +7,7 @@ var StreamTestBed = require('through-stream-testbed');
 // This is a transform function that gets a video buffer, given an object containing a video url.
 var videoTweetToBuffer = require('../../transforms/video-tweet-to-buffer');
 
-var videoTweetPackages = [
+var cells = [
   {
     'tweetId': '849617236574826497',
     'caption': 'Tv2',
@@ -56,24 +56,24 @@ test(
   'Test videoTweetToBufferStream',
   StreamTestBed({
     transformFn: videoTweetToBuffer,
-    inputItems: videoTweetPackages,
+    inputItems: cells,
     checkCollectedStreamOutput: checkObjectsContainingBuffers,
     checkOutputItem: checkObjectContainingBuffer
   })
 );
 
-function checkObjectsContainingBuffers(t, items) {
-  t.equal(items.length, videoTweetPackages.length, 'There is a buffer object for each tweet.');
+function checkObjectsContainingBuffers(t, resultCells) {
+  t.equal(resultCells.length, cells.length, 'There is a buffer object for each tweet.');
 }
 
-function checkObjectContainingBuffer(t, item) {
-  t.ok(item.tweetId, 'There is a tweetId.');
-  t.equal(typeof item.caption, 'string', 'There is a caption.');
-  t.ok(item.date, 'There is a date.');
-  t.equal(item.videoBufferInfo.bitrate, 832000, 'The highest bitrate video was grabbed.');
-  t.ok(Buffer.isBuffer(item.buffer), 'The buffer is a Buffer.');
-  t.ok(item.buffer.length, 'The buffer is not empty.');
-  var outputLocation = __dirname + '/../output/' + item.tweetId + '.mp4';
+function checkObjectContainingBuffer(t, cell) {
+  t.ok(cell.tweetId, 'There is a tweetId.');
+  t.equal(typeof cell.caption, 'string', 'There is a caption.');
+  t.ok(cell.date, 'There is a date.');
+  t.equal(cell.videoBufferInfo.bitrate, 832000, 'The highest bitrate video was grabbed.');
+  t.ok(Buffer.isBuffer(cell.buffer), 'The buffer is a Buffer.');
+  t.ok(cell.buffer.length, 'The buffer is not empty.');
+  var outputLocation = __dirname + '/../output/' + cell.tweetId + '.mp4';
   console.log('Writing result out to', outputLocation, 'Check it out visually.');
-  fs.writeFileSync(outputLocation, item.buffer);
+  fs.writeFileSync(outputLocation, cell.buffer);
 }

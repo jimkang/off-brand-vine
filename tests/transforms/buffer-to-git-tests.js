@@ -11,7 +11,7 @@ var BufferToGit = require('../../transforms/buffer-to-git');
 
 const videoBasePath = __dirname + '/../fixtures/videos/';
 
-var bufferPackages = [
+var cells = [
   {
     'tweetId': '849617236574826497',
     'caption': 'Tv2',
@@ -51,19 +51,20 @@ test(
   'Test bufferToGit',
   StreamTestBed({
     transformFn: bufferToGit,
-    inputItems: bufferPackages,
+    inputItems: cells,
     checkCollectedStreamOutput: checkGitResults,
     checkOutputItem: checkGitResult
   })
 );
 
-function checkGitResults(t, items) {
-  t.equal(items.length, bufferPackages.length, 'There is a git result object for each buffer object.');
+function checkGitResults(t, resultCells) {
+  t.equal(resultCells.length, cells.length, 'There is a git result object for each buffer object.');
 }
 
-function checkGitResult(t, item) {
-  t.ok(item.tweetId, 'There is a tweetId.');
-  t.equal(typeof item.caption, 'string', 'There is a caption.');
-  t.ok(item.date, 'There is a date.');
-  t.ok(item.postedToGit, 'There is a flag indicating it was committed.');
+function checkGitResult(t, cell) {
+  t.ok(cell.tweetId, 'There is a tweetId.');
+  t.equal(typeof cell.caption, 'string', 'There is a caption.');
+  t.ok(cell.date, 'There is a date.');
+  t.ok(cell.postedToGit, 'There is a flag indicating it was committed.');
+  t.ok(cell.videoFilename, 'There is a videoFilename.');
 }
