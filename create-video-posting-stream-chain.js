@@ -4,6 +4,7 @@ var ndjson = require('ndjson');
 var through2 = require('through2');
 var videoTweetToBuffer = require('./transforms/video-tweet-to-buffer');
 var BufferToGit = require('./transforms/buffer-to-git');
+var addHTMLFragment = require('./transforms/add-html-fragment');
 var config = require('./config');
 var request = require('request');
 
@@ -23,10 +24,13 @@ function createVideoPostingStreamChain() {
     videoTweetToBuffer, logError
   );
   var bufferToGitStream = createStreamWithTransform(bufferToGit, logError);
+  var addHTMLFragmentStream = createStreamWithTransform(
+    addHTMLFragment, logError
+  );
 
   videoPackToBufferStream
+    .pipe(addHTMLFragmentStream)
     .pipe(bufferToGitStream)
-    // git to html stream
     .pipe(ndjson.stringify())
     .pipe(process.stdout);
 
