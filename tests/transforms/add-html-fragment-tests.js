@@ -1,14 +1,7 @@
-/* global __dirname */
-
 var test = require('tape');
-var fs = require('fs');
 var StreamTestBed = require('through-stream-testbed');
-var config = require('../../config');
-var request = require('request');
 
-var toHTMLFragment = require('../../transforms/to-html-fragment');
-
-const videoBasePath = __dirname + '/../fixtures/videos/';
+var addHTMLFragment = require('../../transforms/add-html-fragment');
 
 var cells = [
   {
@@ -38,14 +31,14 @@ var cells = [
 ];
 
 var expectedFragments = [
-  '',
-  ''
+  '<li class="video-pane">\n  <div class="video-time-stamp video-meta"><time datetime="2017-04-05T13:38:28.000Z"</div>\n  <video controls loop="true" preload="metadata" src="../lookit/videos/pbDLD37qZWDBGBHW.mp4"></video>\n  <div class="video-caption video-meta">Tv2</div>\n</li>',
+  '<li class="video-pane">\n  <div class="video-time-stamp video-meta"><time datetime="2017-04-05T13:37:45.000Z"</div>\n  <video controls loop="true" preload="metadata" src="../lookit/videos/DPL17ys0-inDTwQW.mp4"></video>\n  <div class="video-caption video-meta"></div>\n</li>'
 ];
 
 test(
-  'Test toHTMLFragment',
+  'Test addHTMLFragment',
   StreamTestBed({
-    transformFn: toHTMLFragment,
+    transformFn: addHTMLFragment,
     inputItems: cells,
     checkCollectedStreamOutput: checkHTMLFragments,
     checkOutputItem: checkHTMLFragment
