@@ -1,10 +1,10 @@
-/* global Buffer */
 var GitHubFile = require('github-file');
 var sb = require('standard-bail')();
 var omit = require('lodash.omit');
 var queue = require('d3-queue').queue;
 var cloneDeep = require('lodash.clonedeep');
 var defaults = require('lodash.defaults');
+var encoders = require('../base-64-encoders');
 
 function BufferToGit(opts) {
   var videoDir = opts.videoDir;
@@ -14,8 +14,8 @@ function BufferToGit(opts) {
     defaults(
       cloneDeep(opts),
       {
-        encodeInBase64: encodeInBase64,
-        decodeFromBase64: decodeFromBase64
+        encodeInBase64: encoders.encodeInBase64,
+        decodeFromBase64: encoders.decodeFromBase64
       }
     )
   );
@@ -23,8 +23,8 @@ function BufferToGit(opts) {
     defaults(
       cloneDeep(opts),
       {
-        encodeInBase64: encodeTextInBase64,
-        decodeFromBase64: decodeFromBase64ToText
+        encodeInBase64: encoders.encodeTextInBase64,
+        decodeFromBase64: encoders.decodeFromBase64ToText
       }
     )
   );
@@ -69,22 +69,6 @@ function getFilename(url) {
   if (parts.length > 0) {
     return parts[parts.length - 1];
   }
-}
-
-function encodeInBase64(buffer) {
-  return buffer.toString('base64');
-}
-
-function decodeFromBase64(s) {
-  return Buffer.from(s, 'base64');
-}
-
-function encodeTextInBase64(s) {
-  return Buffer.from(s, 'utf8').toString('base64');
-}
-
-function decodeFromBase64ToText(s) {
-  return Buffer.from(s, 'base64').toString('utf8');
 }
 
 module.exports = BufferToGit;
