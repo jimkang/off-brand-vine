@@ -1,3 +1,5 @@
+/* global Buffer */
+
 function encodeInBase64(buffer) {
   return buffer.toString('base64');
 }
