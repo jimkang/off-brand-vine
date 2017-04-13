@@ -8,6 +8,7 @@ HOMEDIR = $(shell pwd)
 test:
 	node tests/transforms/video-tweet-to-buffer-tests.js
 	node tests/transforms/buffer-to-git-tests.js
+	node tests/add-cells-to-pages-tests.js
 
 pushall: update-server
 	git push origin gh-pages
