@@ -5,6 +5,7 @@ var through2 = require('through2');
 var videoTweetToBuffer = require('./transforms/video-tweet-to-buffer');
 var BufferToGit = require('./transforms/buffer-to-git');
 var addHTMLFragment = require('./transforms/add-html-fragment');
+var addToIndexes = require('./add-to-indexes')
 var config = require('./config');
 var request = require('request');
 
@@ -20,6 +21,8 @@ var bufferToGit = BufferToGit({
 });
 
 function createVideoPostingStreamChain() {
+  var cellsForIndexUpdate = [];
+
   var videoPackToBufferStream = createStreamWithTransform(
     videoTweetToBuffer, logError
   );
@@ -34,7 +37,20 @@ function createVideoPostingStreamChain() {
     .pipe(ndjson.stringify())
     .pipe(process.stdout);
 
-  bufferToGitStream.on('end', writeIndexes);
+  // bufferToGitStream
+  //   .pipe(singleVideoPageStream)
+  //   .pipe(videoPageToGitStream);
+
+  bufferToGitStream.on('data', saveToIndexUpdate);
+  bufferToGitStream.on('end', callAddToIndexes);
+
+  function saveToIndexUpdate(cell) {
+    cellsForIndexUpdate.push(cell);
+  }
+
+  function callAddToIndexes() {
+    addToIndexes(cellsForIndexUpdate);
+  }
 
   function writeIndexes() {
     // TODO: html index building.
