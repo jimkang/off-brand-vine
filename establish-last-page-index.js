@@ -4,7 +4,6 @@ function establishLastPageIndex(githubFile, indexFileLocation, establishDone) {
   githubFile.get(indexFileLocation, sb(inspectResponse, establishDone));
 
   function inspectResponse(gitResult) {
-    debugger;
     if (gitResult.length < 1) {
       // It doesn't exist, so create it.
       githubFile.update(
