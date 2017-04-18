@@ -13,6 +13,7 @@ function videoTweetToBuffer(cell, enc, done) {
     var newCell = cloneDeep(cell);
     newCell.buffer = buffer;
     newCell.videoBufferInfo = cloneDeep(videoInfo);
+    newCell.videoFilename = getFilename(newCell.videoBufferInfo.url);    
     stream.push(newCell);
     done();
   }
@@ -40,6 +41,13 @@ function getBuffer(url, done) {
       console.error(error);
     }
     done(null, body);
+  }
+}
+
+function getFilename(url) {
+  var parts = url.split('/');
+  if (parts.length > 0) {
+    return parts[parts.length - 1];
   }
 }
 

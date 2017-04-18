@@ -35,7 +35,6 @@ function BufferToGit(opts) {
     var stream = this;
 
     var newCell = omit(cell, 'buffer');
-    newCell.videoFilename = getFilename(cell.videoBufferInfo.url);
 
     var bufferGitPayload = {
       filePath: videoDir + '/' + newCell.videoFilename,
@@ -61,13 +60,6 @@ function BufferToGit(opts) {
       stream.push(newCell);
       done();
     }
-  }
-}
-
-function getFilename(url) {
-  var parts = url.split('/');
-  if (parts.length > 0) {
-    return parts[parts.length - 1];
   }
 }
 

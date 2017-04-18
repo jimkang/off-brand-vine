@@ -66,5 +66,4 @@ function checkGitResult(t, cell) {
   t.equal(typeof cell.caption, 'string', 'There is a caption.');
   t.ok(cell.date, 'There is a date.');
   t.ok(cell.postedToGit, 'There is a flag indicating it was committed.');
-  t.ok(cell.videoFilename, 'There is a videoFilename.');
 }

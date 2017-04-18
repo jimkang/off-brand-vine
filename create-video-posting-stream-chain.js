@@ -5,11 +5,11 @@ var through2 = require('through2');
 var videoTweetToBuffer = require('./transforms/video-tweet-to-buffer');
 var BufferToGit = require('./transforms/buffer-to-git');
 var addHTMLFragment = require('./transforms/add-html-fragment');
-var addToIndexes = require('./add-to-indexes')
 var config = require('./config');
 var request = require('request');
+var AddCellsToPagesInGit = require('./transforms/add-cells-to-pages-in-git');
 
-var bufferToGit = BufferToGit({
+var gitOpts = {
   branch: 'gh-pages',
   gitRepoOwner: config.github.gitRepoOwner,
   gitToken: config.github.gitToken,
@@ -18,11 +18,12 @@ var bufferToGit = BufferToGit({
   shouldSetUserAgent: true,
   videoDir: 'lookit/videos',
   metaDir: 'lookit/meta'
-});
+};
+
+var bufferToGit = BufferToGit(gitOpts);
+var addCellsToPagesInGit = AddCellsToPagesInGit(gitOpts);
 
 function createVideoPostingStreamChain() {
-  var cellsForIndexUpdate = [];
-
   var videoPackToBufferStream = createStreamWithTransform(
     videoTweetToBuffer, logError
   );
@@ -30,32 +31,21 @@ function createVideoPostingStreamChain() {
   var addHTMLFragmentStream = createStreamWithTransform(
     addHTMLFragment, logError
   );
+  var updatePagesStream = createStreamWithTransform(
+    addCellsToPagesInGit, logError
+  );
 
   videoPackToBufferStream
     .pipe(addHTMLFragmentStream)
     .pipe(bufferToGitStream)
+    .pipe(updatePagesStream)
     .pipe(ndjson.stringify())
     .pipe(process.stdout);
 
-  // bufferToGitStream
-  //   .pipe(singleVideoPageStream)
-  //   .pipe(videoPageToGitStream);
+  // function updateIndexHTML(updatedPagesInfo) {
+  //   console.log('updatedPagesInfo', JSON.stringify(updatedPagesInfo, null, 2));
+  // }
 
-  bufferToGitStream.on('data', saveToIndexUpdate);
-  bufferToGitStream.on('end', callAddToIndexes);
-
-  function saveToIndexUpdate(cell) {
-    cellsForIndexUpdate.push(cell);
-  }
-
-  function callAddToIndexes() {
-    addToIndexes(cellsForIndexUpdate);
-  }
-
-  function writeIndexes() {
-    // TODO: html index building.
-    console.log('writeIndexes called.');
-  }
   return videoPackToBufferStream;
 }
 

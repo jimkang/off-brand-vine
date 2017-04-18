@@ -1,13 +1,13 @@
-var encoders = require('./base-64-encoders');
+var encoders = require('../base-64-encoders');
 var defaults = require('lodash.defaults');
 var cloneDeep = require('lodash.clonedeep');
 var callNextTick = require('call-next-tick');
-var establishLastPageIndex = require('./establish-last-page-index');
+var establishLastPageIndex = require('../establish-last-page-index');
 var GitHubFile = require('github-file');
 var waterfall = require('async-waterfall');
 var curry = require('lodash.curry');
 var queue = require('d3-queue').queue;
-var addCellsToPages = require('./add-cells-to-pages');
+var addCellsToPages = require('../add-cells-to-pages');
 
 function AddCellsToPagesInGit(opts) {
   const metaDir = opts.metaDir;
@@ -25,7 +25,7 @@ function AddCellsToPagesInGit(opts) {
 
   return addCellsToPagesInGit;
 
-  function addCellsToPagesInGit(cellsToAdd, addCellsDone) {
+  function addCellsToPagesInGit(cellToAdd, enc, addCellsDone) {
     var lastPageIndex;
     var updatedPagesPackage;
 
@@ -67,7 +67,7 @@ function AddCellsToPagesInGit(opts) {
     function addCells(lastPageCells, done) {
       updatedPagesPackage = addCellsToPages({
         currentLastPage: {index: lastPageIndex, cells: lastPageCells},
-        cellsToAdd: cellsToAdd
+        cellsToAdd: [cellToAdd]
       });
       callNextTick(done);
     }

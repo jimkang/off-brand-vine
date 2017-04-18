@@ -5,7 +5,7 @@ function addHTMLFragment(cell, enc, done) {
 
   cell.htmlFragment = `<li class="video-pane">
   <div class="video-time-stamp video-meta"><time datetime="${formattedDate}"</div>
-  <video controls loop="true" preload="metadata" src="../lookit/videos/${cell.videoFilename}"></video>
+  <video controls loop="true" preload="metadata" src="videos/${cell.videoFilename}"></video>
   <div class="video-caption video-meta">${cell.caption}</div>
 </li>`;
 

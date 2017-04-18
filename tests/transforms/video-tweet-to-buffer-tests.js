@@ -73,6 +73,7 @@ function checkObjectContainingBuffer(t, cell) {
   t.equal(cell.videoBufferInfo.bitrate, 832000, 'The highest bitrate video was grabbed.');
   t.ok(Buffer.isBuffer(cell.buffer), 'The buffer is a Buffer.');
   t.ok(cell.buffer.length, 'The buffer is not empty.');
+  t.ok(cell.videoFilename, 'There is a videoFilename.');
   var outputLocation = __dirname + '/../output/' + cell.tweetId + '.mp4';
   console.log('Writing result out to', outputLocation, 'Check it out visually.');
   fs.writeFileSync(outputLocation, cell.buffer);
