@@ -10,6 +10,7 @@ test:
 	node tests/transforms/buffer-to-git-tests.js
 	node tests/add-cells-to-pages-tests.js
 	node tests/transforms/add-cells-to-pages-in-git-tests.js
+	node tests/make-index-html-from-page-spec-tests.js
 
 pushall: update-server
 	git push origin gh-pages
