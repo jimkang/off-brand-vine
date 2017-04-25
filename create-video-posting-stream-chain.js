@@ -8,6 +8,7 @@ var addHTMLFragment = require('./transforms/add-html-fragment');
 var config = require('./config');
 var request = require('request');
 var AddCellsToPagesInGit = require('./transforms/add-cells-to-pages-in-git');
+var UpdateIndexHTMLInGit = require('./transforms/update-index-html-in-git');
 
 var gitOpts = {
   branch: 'gh-pages',
@@ -22,6 +23,7 @@ var gitOpts = {
 
 var bufferToGit = BufferToGit(gitOpts);
 var addCellsToPagesInGit = AddCellsToPagesInGit(gitOpts);
+var updateIndexHTMLInGit = UpdateIndexHTMLInGit(gitOpts);
 
 function createVideoPostingStreamChain() {
   var videoPackToBufferStream = createStreamWithTransform(
@@ -34,11 +36,15 @@ function createVideoPostingStreamChain() {
   var updatePagesStream = createStreamWithTransform(
     addCellsToPagesInGit, logError
   );
+  var updateIndexHTMLInGitStream = createStreamWithTransform(
+    updateIndexHTMLInGit, logError
+  );
 
   videoPackToBufferStream
     .pipe(addHTMLFragmentStream)
     .pipe(bufferToGitStream)
     .pipe(updatePagesStream)
+    .pipe(updateIndexHTMLInGitStream)
     .pipe(ndjson.stringify())
     .pipe(process.stdout);
 

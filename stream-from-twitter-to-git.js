@@ -1,3 +1,5 @@
+// require('longjohn');
+
 var createVideoPostingStreamChain = require('./create-video-posting-stream-chain');
 var boilTweetToVideo = require('boil-tweet-to-video');
 var Twit = require('twit');
