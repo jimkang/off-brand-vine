@@ -1,7 +1,5 @@
 var pluck = require('lodash.pluck');
 
-// TODO: Make sure transform before this one puts date on cells.
-
 function makeIndexHTMLFromPageSpec({
     mostRecentPageIndex,
     header,

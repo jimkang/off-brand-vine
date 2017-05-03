@@ -42,6 +42,7 @@ function createVideoPostingStreamChain() {
 
   videoPackToBufferStream
     .pipe(addHTMLFragmentStream)
+    .pipe(addSingleVideoPagesToGit)
     .pipe(bufferToGitStream)
     .pipe(updatePagesStream)
     .pipe(updateIndexHTMLInGitStream)

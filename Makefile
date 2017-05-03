@@ -13,6 +13,7 @@ test:
 	node tests/make-index-html-from-page-spec-tests.js
 	node tests/transforms/add-cells-to-pages-in-git-tests.js
 	node tests/transforms/update-index-html-in-git-tests.js
+	node tests/transforms/add-single-video-page-in-git-tests.js
 
 pushall: update-server
 	git push origin gh-pages
