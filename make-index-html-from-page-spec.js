@@ -1,5 +1,7 @@
 var pluck = require('lodash.pluck');
 
+// TODO: Make sure transform before this one puts date on cells.
+
 function makeIndexHTMLFromPageSpec({
     mostRecentPageIndex,
     header,
@@ -11,12 +13,19 @@ function makeIndexHTMLFromPageSpec({
   if (pageSpec.index === mostRecentPageIndex)   {
     filename = 'index.html';
   }
+
+  var sortedCells = pageSpec.cells.sort(compareCellsByDateDesc);
+
   return {
     filename: filename,
     content: header + '\n' +
-      pluck(pageSpec.cells, 'htmlFragment').join('\n') + '\n' +
+      pluck(sortedCells, 'htmlFragment').join('\n') + '\n' +
       footer + '\n'
   };
+}
+
+function compareCellsByDateDesc(a, b) {
+  return (new Date(a.date)) > (new Date(b.date)) ? -1 : 1;
 }
 
 module.exports = makeIndexHTMLFromPageSpec;
