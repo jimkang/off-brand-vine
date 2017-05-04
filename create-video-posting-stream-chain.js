@@ -9,6 +9,7 @@ var config = require('./config');
 var request = require('request');
 var AddCellsToPagesInGit = require('./transforms/add-cells-to-pages-in-git');
 var UpdateIndexHTMLInGit = require('./transforms/update-index-html-in-git');
+var AddSingleVideoPageInGit = require('./transforms/add-single-video-page-in-git');
 
 var gitOpts = {
   branch: 'gh-pages',
@@ -18,12 +19,13 @@ var gitOpts = {
   request: request,
   shouldSetUserAgent: true,
   videoDir: 'lookit/videos',
-  metaDir: 'lookit/meta'
+  htmlDir: 'lookit'
 };
 
 var bufferToGit = BufferToGit(gitOpts);
 var addCellsToPagesInGit = AddCellsToPagesInGit(gitOpts);
 var updateIndexHTMLInGit = UpdateIndexHTMLInGit(gitOpts);
+var addSingleVideoPageInGit = AddSingleVideoPageInGit(gitOpts);
 
 function createVideoPostingStreamChain() {
   var videoPackToBufferStream = createStreamWithTransform(
@@ -39,10 +41,13 @@ function createVideoPostingStreamChain() {
   var updateIndexHTMLInGitStream = createStreamWithTransform(
     updateIndexHTMLInGit, logError
   );
+  var addSingleVideoPageInGitStream = createStreamWithTransform(
+    addSingleVideoPageInGit, logError
+  );
 
   videoPackToBufferStream
     .pipe(addHTMLFragmentStream)
-    .pipe(addSingleVideoPagesToGit)
+    .pipe(addSingleVideoPageInGitStream)
     .pipe(bufferToGitStream)
     .pipe(updatePagesStream)
     .pipe(updateIndexHTMLInGitStream)

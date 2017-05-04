@@ -7,31 +7,10 @@ var waterfall = require('async-waterfall');
 var queue = require('d3-queue').queue;
 var makeIndexHTMLFromPageSpec = require('../make-index-html-from-page-spec');
 var sb = require('standard-bail')();
-
-const pageHeader = `<html>
-<head>
-  <title>Lookit!</title>
-  <link rel="stylesheet" href="../app.css"></link>
-  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-</head>
-<body>
-
-<div class="annotation hidden warning">
-</div>
-
-<h1>Lookit: My bideo!</h1>
-
-<section class="videos">
-  <ul class="video-list">`;
-
-const pageFooter = `</ul>
-</section>
-
-</body>
-</html>`;
+var template = require('../page-template');
 
 function UpdateIndexHTMLInGit(opts) {
-  const metaDir = opts.metaDir;
+  const htmlDir = opts.htmlDir;
 
   var githubFileForText = GitHubFile(
     defaults(
@@ -56,8 +35,8 @@ function UpdateIndexHTMLInGit(opts) {
     function makeIndexHTMLFromPage(page) {
       return makeIndexHTMLFromPageSpec({
         mostRecentPageIndex: cell.newLastPageIndex,
-        header: pageHeader, 
-        footer: pageFooter,
+        header: template.header, 
+        footer: template.footer,
         pageSpec: page
       });
     }
@@ -78,7 +57,7 @@ function UpdateIndexHTMLInGit(opts) {
       function updateFileInGit(done) {
         githubFileForText.update(
           {
-            filePath: metaDir + '/' + htmlPackage.filename,
+            filePath: htmlDir + '/' + htmlPackage.filename,
             content: htmlPackage.content
           },
           done

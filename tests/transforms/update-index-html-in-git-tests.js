@@ -64,7 +64,7 @@ var updateIndexHTMLInGit = UpdateIndexHTMLInGit({
   repo: config.githubTest.repo,
   request: request,
   shouldSetUserAgent: true,
-  metaDir: 'video/meta'
+  htmlDir: 'video'
 });
 
 test(
