@@ -19,6 +19,7 @@ var gitOpts = {
   request: request,
   shouldSetUserAgent: true,
   videoDir: 'lookit/videos',
+  metaDir: 'lookit/meta',
   htmlDir: 'lookit'
 };
 
