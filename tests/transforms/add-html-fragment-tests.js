@@ -31,8 +31,24 @@ var cells = [
 ];
 
 var expectedFragments = [
-  '<li class="video-pane">\n  <div class="video-time-stamp video-meta"><time datetime="2017-04-05T13:38:28.000Z">4/5/2017, 9:38:28 AM</time></div>\n  <video controls loop="true" preload="metadata" src="videos/pbDLD37qZWDBGBHW.mp4"></video>\n  <div class="video-caption video-meta">Tv2</div>\n</li>',
-  '<li class="video-pane">\n  <div class="video-time-stamp video-meta"><time datetime="2017-04-05T13:37:45.000Z">4/5/2017, 9:37:45 AM</time></div>\n  <video controls loop="true" preload="metadata" src="videos/DPL17ys0-inDTwQW.mp4"></video>\n  <div class="video-caption video-meta"></div>\n</li>'
+  `<li class="video-pane">
+  <div class="video-time-stamp video-meta">
+    <a href="849617236574826497.html">
+      <time datetime="2017-04-05T13:38:28.000Z">4/5/2017, 9:38:28 AM</time>
+    </a>
+  </div>
+  <video controls loop="true" preload="metadata" src="videos/pbDLD37qZWDBGBHW.mp4"></video>
+  <div class="video-caption video-meta">Tv2</div>
+</li>`,
+  `<li class="video-pane">
+  <div class="video-time-stamp video-meta">
+    <a href="849617052130213888.html">
+      <time datetime="2017-04-05T13:37:45.000Z">4/5/2017, 9:37:45 AM</time>
+    </a>
+  </div>
+  <video controls loop="true" preload="metadata" src="videos/DPL17ys0-inDTwQW.mp4"></video>
+  <div class="video-caption video-meta"></div>
+</li>`
 ];
 
 test(
