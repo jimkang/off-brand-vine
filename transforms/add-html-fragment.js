@@ -12,7 +12,7 @@ function addHTMLFragment(cell, enc, done) {
     </a>
   </div>
   <video controls loop="true" preload="metadata" src="videos/${cell.videoFilename}"></video>
-  <div class="video-caption video-meta">${cell.caption}</div>
+  <div class="video-caption video-meta"><a href="${cell.tweetId}.html">${cell.caption}</a></div>
 </li>`;
 
   this.push(cell);

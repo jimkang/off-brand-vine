@@ -38,7 +38,7 @@ var expectedFragments = [
     </a>
   </div>
   <video controls loop="true" preload="metadata" src="videos/pbDLD37qZWDBGBHW.mp4"></video>
-  <div class="video-caption video-meta">Tv2</div>
+  <div class="video-caption video-meta"><a href="849617236574826497.html">Tv2</a></div>
 </li>`,
   `<li class="video-pane">
   <div class="video-time-stamp video-meta">
@@ -47,7 +47,7 @@ var expectedFragments = [
     </a>
   </div>
   <video controls loop="true" preload="metadata" src="videos/DPL17ys0-inDTwQW.mp4"></video>
-  <div class="video-caption video-meta"></div>
+  <div class="video-caption video-meta"><a href="849617052130213888.html"></a></div>
 </li>`
 ];
 
