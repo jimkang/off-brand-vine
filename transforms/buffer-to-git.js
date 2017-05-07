@@ -52,6 +52,7 @@ function BufferToGit(opts) {
     // between the other's sha-get and commit, thereby changing the branch tip.
     var q = queue(1);
     q.defer(githubFileForBuffers.update, bufferGitPayload);
+    q.defer(wait);
     q.defer(githubFileForText.update, metadataGitPayload);
     q.awaitAll(sb(passPackage, done));
 
@@ -61,6 +62,10 @@ function BufferToGit(opts) {
       done();
     }
   }
+}
+
+function wait(done) {
+  setTimeout(done, 1000);
 }
 
 module.exports = BufferToGit;
