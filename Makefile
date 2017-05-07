@@ -5,12 +5,14 @@ PRIVSSHCMD = ssh $(PRIVUSER)@$(SERVER)
 APPDIR = /opt/$(PROJECTNAME)
 HOMEDIR = $(shell pwd)
 
-test:
+test: git-tests
 	node tests/transforms/video-tweet-to-buffer-tests.js
-	node tests/transforms/buffer-to-git-tests.js
 	node tests/add-cells-to-pages-tests.js
-	node tests/transforms/add-cells-to-pages-in-git-tests.js
 	node tests/make-index-html-from-page-spec-tests.js
+
+git-tests:
+	node tests/transforms/buffer-to-git-tests.js
+	node tests/transforms/buffer-to-git-tests.js
 	node tests/transforms/add-cells-to-pages-in-git-tests.js
 	node tests/transforms/update-index-html-in-git-tests.js
 	node tests/transforms/add-single-video-page-in-git-tests.js

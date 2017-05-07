@@ -84,5 +84,5 @@ function checkGitResults(t, resultCells) {
 
 function checkGitResult(t, resultCell) {
   t.ok(resultCell.indexesHTML.length > 0, 'There is at least one index html.');
-  console.log(resultCell.indexesHTML);
+  // console.log(resultCell.indexesHTML);
 }
