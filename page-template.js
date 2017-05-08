@@ -18,8 +18,9 @@ function getHeader() {
 
 function getFooter({previousIndexHTML}) {
   return `</ul>
-  <div class="previous-indexes">${previousIndexHTML}</div>
   </section>
+
+  <div class="previous-indexes">${previousIndexHTML}</div>
 
   </body>
   </html>`;
