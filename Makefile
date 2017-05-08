@@ -12,7 +12,6 @@ test: git-tests
 
 git-tests:
 	node tests/transforms/buffer-to-git-tests.js
-	node tests/transforms/buffer-to-git-tests.js
 	node tests/transforms/add-cells-to-pages-in-git-tests.js
 	node tests/transforms/update-index-html-in-git-tests.js
 	node tests/transforms/add-single-video-page-in-git-tests.js

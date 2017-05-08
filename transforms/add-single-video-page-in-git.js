@@ -22,9 +22,9 @@ function AddSingleVideoPageInGit(opts) {
   return addSingleVideoPageInGit;
 
   function addSingleVideoPageInGit(cellToAdd, enc, addCellsDone) {
-    var html = template.header + '\n'
+    var html = template.getHeader() + '\n'
       + cellToAdd.htmlFragment + '\n' +
-      template.footer;
+      template.getFooter({previousIndexHTML: ''});
 
     githubFileForText.update(
       {

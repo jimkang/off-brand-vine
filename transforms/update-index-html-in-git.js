@@ -32,11 +32,11 @@ function UpdateIndexHTMLInGit(opts) {
     htmlPackages.forEach(queueHTMLUpdate);
     q.awaitAll(sb(passResults, updateDone));
 
-    function makeIndexHTMLFromPage(page) {
+    function makeIndexHTMLFromPage(page) {      
       return makeIndexHTMLFromPageSpec({
         mostRecentPageIndex: cell.newLastPageIndex,
-        header: template.header, 
-        footer: template.footer,
+        header: template.getHeader(), 
+        footer: template.getFooter({previousIndexHTML: getPreviousIndexHTML(page)}),
         pageSpec: page
       });
     }
@@ -78,6 +78,17 @@ function UpdateIndexHTMLInGit(opts) {
       updateDone();
     }
   }
+}
+
+function getPreviousIndexHTML(page) {
+  var previousIndexHTML = '';
+  for (var i = page.index; i > 0; --i) {
+    if (previousIndexHTML.length > 0) {
+      previousIndexHTML += ' | \n';
+    }
+    previousIndexHTML += `<a href="${i}.html">${i}</a>`;
+  }
+  return previousIndexHTML;
 }
 
 module.exports = UpdateIndexHTMLInGit;
