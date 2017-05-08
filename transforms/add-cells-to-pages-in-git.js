@@ -36,6 +36,7 @@ function AddCellsToPagesInGit(opts) {
         saveLastPageIndex,
         getLastPage,
         addCells,
+        prePageUpdateDelay,
         updatePagesInGit,
         postPageUpdateDelay,
         updateLastPageIndex,
@@ -114,6 +115,10 @@ function AddCellsToPagesInGit(opts) {
 // that last commit. So: wait.
 function postPageUpdateDelay(pagesGitPackages, done) {
   setTimeout(() => done(null, pagesGitPackages), 1000);
+}
+
+function prePageUpdateDelay(done) {
+  setTimeout(done, 1000);
 }
 
 function postIndexUpdateDelay(done) {
