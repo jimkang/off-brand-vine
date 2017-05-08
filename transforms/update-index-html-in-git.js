@@ -83,10 +83,11 @@ function UpdateIndexHTMLInGit(opts) {
 function getPreviousIndexHTML(page) {
   var previousIndexHTML = '';
   for (var i = page.index; i > 0; --i) {
+    let previousIndex = i - 1;
     if (previousIndexHTML.length > 0) {
       previousIndexHTML += ' | \n';
     }
-    previousIndexHTML += `<a href="${i}.html">${i}</a>`;
+    previousIndexHTML += `<a href="${previousIndex}.html">${previousIndex}</a>`;
   }
   return previousIndexHTML;
 }
