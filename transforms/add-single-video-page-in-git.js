@@ -1,7 +1,6 @@
 var encoders = require('../base-64-encoders');
 var defaults = require('lodash.defaults');
 var cloneDeep = require('lodash.clonedeep');
-var callNextTick = require('call-next-tick');
 var GitHubFile = require('github-file');
 var template = require('../page-template');
 var sb = require('standard-bail')();
@@ -31,12 +30,16 @@ function AddSingleVideoPageInGit(opts) {
         filePath: htmlDir + '/' + cellToAdd.tweetId + '.html',
         content: html
       },
-      sb(passResults, addCellsDone)
+      sb(passResultsAfterDelay, addCellsDone)
     );
+
+    function passResultsAfterDelay() {
+      setTimeout(passResults, 1000);
+    }
 
     function passResults() {
       cellToAdd.postedSingleVideoPage = true;
-      callNextTick(addCellsDone, null, cellToAdd);
+      addCellsDone(null, cellToAdd);
     }
   }
 }
