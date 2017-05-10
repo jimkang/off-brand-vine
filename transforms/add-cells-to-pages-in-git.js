@@ -93,8 +93,16 @@ function AddCellsToPagesInGit(opts) {
           filePath: filePath,
           content: JSON.stringify(page.cells)
         },
-        done
+        passAfterDelay
       );
+
+      function passAfterDelay(error, pageGitPackage) {
+        setTimeout(passPageUpdatePackage, 1000);
+
+        function passPageUpdatePackage() {
+          done(error, pageGitPackage);
+        }
+      }
     }
 
     function updateLastPageIndex(pagesGitPackages, done) {
@@ -114,11 +122,11 @@ function AddCellsToPagesInGit(opts) {
 // Then, you can end up getting the SHA for a file just *before* it updates from
 // that last commit. So: wait.
 function postPageUpdateDelay(pagesGitPackages, done) {
-  setTimeout(() => done(null, pagesGitPackages), 1000);
+  setTimeout(() => done(null, pagesGitPackages), 1500);
 }
 
 function prePageUpdateDelay(done) {
-  setTimeout(done, 1000);
+  setTimeout(done, 1500);
 }
 
 function postIndexUpdateDelay(done) {
