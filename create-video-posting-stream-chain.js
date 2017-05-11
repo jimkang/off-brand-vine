@@ -13,9 +13,9 @@ var AddSingleVideoPageInGit = require('./transforms/add-single-video-page-in-git
 
 var gitOpts = {
   branch: 'gh-pages',
-  gitRepoOwner: config.github.gitRepoOwner,
-  gitToken: config.github.gitToken,
-  repo: config.github.repo,
+  gitRepoOwner: config.githubTest.gitRepoOwner,
+  gitToken: config.githubTest.gitToken,
+  repo: config.githubTest.repo,
   request: request,
   shouldSetUserAgent: true,
   videoDir: 'lookit/videos',

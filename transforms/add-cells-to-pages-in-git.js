@@ -36,11 +36,8 @@ function AddCellsToPagesInGit(opts) {
         saveLastPageIndex,
         getLastPage,
         addCells,
-        prePageUpdateDelay,
         updatePagesInGit,
-        postPageUpdateDelay,
         updateLastPageIndex,
-        postIndexUpdateDelay,
         passResults
       ],
       addCellsDone
@@ -93,11 +90,12 @@ function AddCellsToPagesInGit(opts) {
           filePath: filePath,
           content: JSON.stringify(page.cells)
         },
-        passAfterDelay
+        passAfterSavingSHA
       );
 
-      function passAfterDelay(error, pageGitPackage) {
-        setTimeout(passPageUpdatePackage, 1000);
+      function passAfterSavingSHA(error, pageGitPackage) {
+        // TODO: Save sha.
+        setTimeout(passPageUpdatePackage, 0);
 
         function passPageUpdatePackage() {
           done(error, pageGitPackage);
@@ -118,19 +116,5 @@ function AddCellsToPagesInGit(opts) {
   }
 }
 
-// Sometimes, a commit does not "take" completely even though the API responds.
-// Then, you can end up getting the SHA for a file just *before* it updates from
-// that last commit. So: wait.
-function postPageUpdateDelay(pagesGitPackages, done) {
-  setTimeout(() => done(null, pagesGitPackages), 1500);
-}
-
-function prePageUpdateDelay(done) {
-  setTimeout(done, 1500);
-}
-
-function postIndexUpdateDelay(done) {
-  setTimeout(done, 1500);
-}
 
 module.exports = AddCellsToPagesInGit;

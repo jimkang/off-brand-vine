@@ -1,7 +1,6 @@
 var GitHubFile = require('github-file');
 var sb = require('standard-bail')();
 var omit = require('lodash.omit');
-var queue = require('d3-queue').queue;
 var cloneDeep = require('lodash.clonedeep');
 var defaults = require('lodash.defaults');
 var encoders = require('../base-64-encoders');
@@ -42,30 +41,32 @@ function BufferToGit(opts) {
       message: 'off-brand-vine posting video'
     };
 
-    var metadataGitPayload = {
-      filePath: metaDir + '/' + newCell.tweetId + '.json',
-      content: JSON.stringify(newCell),
-      message: 'off-brand-vine posting video metadata'
-    };
+    if (newCell.latestSha) {
+      bufferGitPayload.parentSha = newCell.latestSha;
+    }
 
     // It's really important to make these updates serially so that one doesn't commit
     // between the other's sha-get and commit, thereby changing the branch tip.
-    var q = queue(1);
-    q.defer(githubFileForBuffers.update, bufferGitPayload);
-    q.defer(wait);
-    q.defer(githubFileForText.update, metadataGitPayload);
-    q.awaitAll(sb(passPackage, done));
+    githubFileForBuffers.update(bufferGitPayload, sb(updateMetadata, done));
 
-    function passPackage() {
+    function updateMetadata(bufferCommit) {
+      newCell.latestSha = bufferCommit.sha;
+      var metadataGitPayload = {
+        filePath: metaDir + '/' + newCell.tweetId + '.json',
+        content: JSON.stringify(newCell),
+        message: 'off-brand-vine posting video metadata',
+        // parentSha: newCell.latestSha
+      };
+      githubFileForText.update(metadataGitPayload, sb(passPackage, done));
+    }
+
+    function passPackage(commit) {
       newCell.postedToGit = true;
+      newCell.latestSha = commit.sha;
       stream.push(newCell);
       done();
     }
   }
-}
-
-function wait(done) {
-  setTimeout(done, 1000);
 }
 
 module.exports = BufferToGit;

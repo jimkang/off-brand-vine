@@ -30,15 +30,12 @@ function AddSingleVideoPageInGit(opts) {
         filePath: htmlDir + '/' + cellToAdd.tweetId + '.html',
         content: html
       },
-      sb(passResultsAfterDelay, addCellsDone)
+      sb(passResults, addCellsDone)
     );
 
-    function passResultsAfterDelay() {
-      setTimeout(passResults, 1000);
-    }
-
-    function passResults() {
+    function passResults(commit) {
       cellToAdd.postedSingleVideoPage = true;
+      cellToAdd.latestSha = commit.sha;
       addCellsDone(null, cellToAdd);
     }
   }

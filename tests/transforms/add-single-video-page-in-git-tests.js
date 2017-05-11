@@ -38,4 +38,5 @@ function checkGitResults(t, resultCells) {
 
 function checkGitResult(t, resultCell) {
   t.ok(resultCell.postedSingleVideoPage, 'postedSingleVideoPage flag is set.');
+  t.ok(resultCell.latestSha, 'latestSha is set.');
 }
