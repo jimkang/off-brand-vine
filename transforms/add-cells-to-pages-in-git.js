@@ -129,7 +129,7 @@ function prePageUpdateDelay(done) {
   setTimeout(done, 1500);
 }
 
-function postIndexUpdateDelay(done) {
+function postIndexUpdateDelay(content, done) {
   setTimeout(done, 1500);
 }
 

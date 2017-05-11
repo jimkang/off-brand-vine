@@ -64,7 +64,7 @@ function UpdateIndexHTMLInGit(opts) {
         );
       }
 
-      function addIndexHTMLToCell(done) {
+      function addIndexHTMLToCell(content, done) {
         if (!cell.indexesHTML) {
           cell.indexesHTML = [];
         }
