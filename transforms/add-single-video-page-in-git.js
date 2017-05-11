@@ -25,9 +25,15 @@ function AddSingleVideoPageInGit(opts) {
       + cellToAdd.htmlFragment + '\n' +
       template.getFooter({previousIndexHTML: ''});
 
+    var filePath = '';
+    if (htmlDir) {
+      filePath = htmlDir + '/';
+    }
+    filePath +=  cellToAdd.tweetId + '.html';
+
     githubFileForText.update(
       {
-        filePath: htmlDir + '/' + cellToAdd.tweetId + '.html',
+        filePath: filePath,
         content: html
       },
       sb(passResultsAfterDelay, addCellsDone)

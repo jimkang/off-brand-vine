@@ -55,9 +55,15 @@ function UpdateIndexHTMLInGit(opts) {
       );
 
       function updateFileInGit(done) {
+        var filePath = '';
+        if (htmlDir) {
+          filePath = htmlDir + '/';
+        }
+        filePath +=  htmlPackage.filename;
+
         githubFileForText.update(
           {
-            filePath: htmlDir + '/' + htmlPackage.filename,
+            filePath: filePath,
             content: htmlPackage.content
           },
           done
