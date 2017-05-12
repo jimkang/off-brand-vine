@@ -31,7 +31,7 @@
     "d3-array": "^1.1.1",
     "d3-queue": "^3.0.5",
     "get-video-from-twitter-timeline": "^1.0.3",
-    "github-file": "^1.0.7",
+    "github-file": "^1.1.2",
     "idmaker": "^0.1.1",
     "lodash.clonedeep": "^4.5.0",
     "lodash.curry": "^4.1.1",
