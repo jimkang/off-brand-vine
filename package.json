@@ -42,6 +42,7 @@
     "probable": "^2.1.1",
     "request": "^2.81.0",
     "standard-bail": "^2.0.1",
+    "static-web-archive": "^3.0.0",
     "through2": "^2.0.3",
     "twit": "^2.2.5"
   }

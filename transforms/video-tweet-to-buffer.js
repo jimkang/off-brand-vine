@@ -1,9 +1,10 @@
 var request = require('request');
 var sb = require('standard-bail')();
 var cloneDeep = require('lodash.clonedeep');
+var path = require('path');
+var URL = require('url').URL;
 
 function videoTweetToBuffer(cell, enc, done) {
-  var stream = this;
   var videoInfo = cell.videos.reduce(
     getHighestBitrateVideo, {bitrate: 0}
   );
@@ -14,8 +15,7 @@ function videoTweetToBuffer(cell, enc, done) {
     newCell.buffer = buffer;
     newCell.videoBufferInfo = cloneDeep(videoInfo);
     newCell.videoFilename = getFilename(newCell.videoBufferInfo.url);    
-    stream.push(newCell);
-    done();
+    done(null, newCell);
   }
 }
 
@@ -45,10 +45,8 @@ function getBuffer(url, done) {
 }
 
 function getFilename(url) {
-  var parts = url.split('/');
-  if (parts.length > 0) {
-    return parts[parts.length - 1];
-  }
+  var fileURL = new URL(url);
+  return path.basename(fileURL.pathname);
 }
 
 module.exports = videoTweetToBuffer;
