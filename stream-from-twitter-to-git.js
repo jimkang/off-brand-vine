@@ -10,8 +10,9 @@ var config = require('./config');
 var staticWebStream = StaticWebArchive({
   title: 'Lookit!',
   // footerHTML: `<div>Bottom of page</div>`,
-  rootPath: 'tests/mock-root',
-  // rootPath: '/usr/share/nginx/html/weblog',
+  // rootPath: 'tests/mock-root',
+  rootPath: config.rootPath,
+  // rootPath: '../andersonkang.com/lookit',
   maxEntriesPerPage: 10,
   config
 });
