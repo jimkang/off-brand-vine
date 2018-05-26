@@ -2,7 +2,7 @@
 Description=off-brand-vine
 After=network.target
 [Service]
-ExecStart=/usr/local/bin/node /opt/off-brand-vine/stream-from-twitter-to-git.js
+ExecStart=/usr/local/bin/node /opt/off-brand-vine/stream-from-twitter-to-web.js
 Restart=always
 User=bot
 Group=bot
