@@ -52,3 +52,7 @@ check-status:
 
 check-log:
 	$(SSHCMD) "journalctl -r -u $(PROJECTNAME)" | more
+
+prettier:
+	prettier --single-quote --write "**/*.js"
+

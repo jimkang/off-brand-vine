@@ -1,8 +1,9 @@
 // require('longjohn');
 
 var StaticWebArchive = require('static-web-archive');
-var boilTweetToVideo = require('boil-tweet-to-video');
+var boilTweetToMedia = require('./boil-tweet-to-media');
 var videoTweetToBuffer = require('./transforms/video-tweet-to-buffer');
+var imageTweetToBuffer = require('./transforms/image-tweet-to-buffer');
 var Twit = require('twit');
 var sb = require('standard-bail')();
 
@@ -12,39 +13,44 @@ var staticWebStream = StaticWebArchive({
   // footerHTML: `<div>Bottom of page</div>`,
   // rootPath: 'tests/mock-root',
   rootPath: config.rootPath,
-  // rootPath: '../andersonkang.com/lookit',
   maxEntriesPerPage: 10,
   config
 });
 var twit = Twit(config.twitter);
 
-var tweetStream = twit.stream('user', {with: 'user'});
-tweetStream.on('tweet', postVideoFromTweet);
+var tweetStream = twit.stream('user', { with: 'user' });
+tweetStream.on('tweet', postMediaFromTweet);
 tweetStream.on('error', logError);
 
-function postVideoFromTweet(incomingTweet) {
-  var videoPackage = boilTweetToVideo(incomingTweet);
-  if (videoPackage) {
-    console.log('videoPackage', videoPackage);
-    if (Array.isArray(videoPackage.videos) && videoPackage.videos.length > 0) {
-      videoTweetToBuffer(videoPackage, null, sb(writeToWebStream, logError));
+function postMediaFromTweet(incomingTweet) {
+  var mediaPackage = boilTweetToMedia(incomingTweet);
+  if (mediaPackage) {
+    console.log('mediaPackage', mediaPackage);
+    if (mediaPackage.mediaType === 'video') {
+      if (
+        Array.isArray(mediaPackage.videos) &&
+        mediaPackage.videos.length > 0
+      ) {
+        videoTweetToBuffer(mediaPackage, null, sb(writeToWebStream, logError));
+      }
+    } else if (mediaPackage.mediaType === 'image') {
+      imageTweetToBuffer(mediaPackage, null, sb(writeToWebStream, logError));
     }
   }
 }
 
-function writeToWebStream(videoPackageWithBuffer) {
+function writeToWebStream(mediaPackageWithBuffer) {
   staticWebStream.write({
-    id: videoPackageWithBuffer.tweetId,
-    date: new Date(videoPackageWithBuffer.date),
-    mediaFilename: videoPackageWithBuffer.videoFilename,
-    caption: videoPackageWithBuffer.caption,
-    altText: videoPackageWithBuffer.caption,
-    buffer: videoPackageWithBuffer.buffer,
-    isVideo: true
+    id: mediaPackageWithBuffer.tweetId,
+    date: new Date(mediaPackageWithBuffer.date),
+    mediaFilename: mediaPackageWithBuffer.mediaFilename,
+    caption: mediaPackageWithBuffer.caption,
+    altText: mediaPackageWithBuffer.caption,
+    buffer: mediaPackageWithBuffer.buffer,
+    isVideo: mediaPackageWithBuffer.mediaType === 'video'
   });
 }
 
 function logError(error) {
   console.log(error);
 }
-

@@ -21,12 +21,11 @@
   "devDependencies": {
     "assert-no-error": "^1.0.0",
     "longjohn": "^0.2.12",
-    "tape": "^4.6.0",
+    "tape": "^4.9.0",
     "through-stream-testbed": "^1.0.0"
   },
   "dependencies": {
     "async-waterfall": "^0.1.5",
-    "boil-tweet-to-video": "^1.0.0",
     "call-next-tick": "^2.0.1",
     "d3-array": "^1.1.1",
     "d3-queue": "^3.0.5",
@@ -39,11 +38,12 @@
     "lodash.omit": "^4.5.0",
     "lodash.pluck": "^3.1.2",
     "ndjson": "^1.5.0",
+    "object-path-exists": "^1.0.0",
     "probable": "^2.1.1",
-    "request": "^2.81.0",
+    "request": "^2.87.0",
     "standard-bail": "^2.0.1",
     "static-web-archive": "^3.0.0",
     "through2": "^2.0.3",
-    "twit": "^2.2.5"
+    "twit": "^2.2.9"
   }
 }
