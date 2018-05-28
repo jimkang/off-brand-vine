@@ -1,7 +1,7 @@
 off-brand-vine
 ==================
 
-A process that takes videos from a Twitter account and puts it into a GitHub repo (from which you can make a web page that displays them).
+A process that takes videos (and images) from a Twitter account and puts it into a GitHub repo (from which you can make a web page that displays them).
 
 Installation
 ------------
