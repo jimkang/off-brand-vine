@@ -8,7 +8,7 @@ function imageTweetToBuffer(cell, enc, done) {
   function pushBufferPackage(buffer) {
     var newCell = cloneDeep(cell);
     newCell.buffer = buffer;
-    newCell.mediaFilename = getFilename(newCell.imageURL);    
+    newCell.mediaFilename = getFilename(newCell.imageURL);
     done(null, newCell);
   }
 }
